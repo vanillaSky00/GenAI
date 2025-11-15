@@ -2,7 +2,7 @@
 import inspect
 import os
 from string import Template
-from typing import Dict, Any, List
+from typing import Dict
 
 from .tools import Tool
 from .llm_client import LLMClient
@@ -13,11 +13,10 @@ import basic_agent.utils as utils
 
 
 class ReActAgent:
-    def __init__(self, tools: Dict[str, Tool], model: str, client: LLMClient, parser: MatchedStep, project_directory: str):
+    def __init__(self, tools: Dict[str, Tool], model: str, client: LLMClient, project_directory: str):
         self.tools = tools
         self.model = model
         self.client = client
-        self.parser = parser
         self.project_directory = project_directory
     
     def run(self, user_input: str):
@@ -92,12 +91,8 @@ class ReActAgent:
         return content
     
     
-    def _run_tool(self):
-        pass
+    def _run_tool(self, tool_name: str, args: tuple):
+        return self.tools[tool_name].handler(*args)
     
-    def parse_action(self):
-        pass
-    
-    def _parse_single_arg(self):
-        pass
+
     

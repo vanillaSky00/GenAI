@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Callable, Any, Dict
+from typing import Callable, Dict
 
 @dataclass
 class Tool:

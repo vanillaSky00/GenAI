@@ -18,3 +18,12 @@ def get_api_key() -> str:
         raise ValueError("Cannot find OPENAI_API_KEY, please make sure .env is correctly configured")
     
     return api_key
+
+def get_llm_model_name() -> str:
+    load_dotenv()    
+    llm_model_name = os.getenv("LLM_MODEL")
+    
+    if not llm_model_name:
+        raise ValueError("Cannot find LLM_MODEL, please make sure .env is correctly configured")
+    
+    return llm_model_name

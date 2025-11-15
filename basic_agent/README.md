@@ -25,3 +25,12 @@ This loop enables the model to interact with the outside world instead of only g
 ## What is Plan-And-Execute
 Reference: https://langchain-ai.github.io/langgraph/tutorials/plan-and-execute/plan-and-execute/
 
+
+
+## 
+
+keeps ReActAgent focused on:
+- rendering the system prompt
+- orchestrating messages
+- parsing tool calls
+- running tools
