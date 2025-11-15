@@ -1,0 +1,1 @@
+required_permissions=1

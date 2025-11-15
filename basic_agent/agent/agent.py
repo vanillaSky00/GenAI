@@ -6,15 +6,18 @@ from typing import Dict, Any, List
 
 from .tools import Tool
 from .llm_client import LLMClient
+from .policy import required_permissions
+from .parser import MatchedStep, match_react_output, parse_action
 from basic_agent.prompt_template import react_system_prompt_template
 import basic_agent.utils as utils  
 
 
 class ReActAgent:
-    def __init__(self, tools: Dict[str, Tool], model: str, client: LLMClient, project_directory: str):
+    def __init__(self, tools: Dict[str, Tool], model: str, client: LLMClient, parser: MatchedStep, project_directory: str):
         self.tools = tools
         self.model = model
         self.client = client
+        self.parser = parser
         self.project_directory = project_directory
     
     def run(self, user_input: str):
@@ -26,16 +29,32 @@ class ReActAgent:
         while True:
             content = self.call_model(messages)
             
-            thought = self._check_thought(content)
-            final = self._check_final(content)
+            matched = match_react_output(content)
             
-            if final is not None:
-                return final
+            if matched.thought:
+                print(f"\n\n💭 Thought: {matched.thought}")
+                
+            if matched.final_answer:
+                return matched.final_answer
             
-            action_str = self._check_action(content)
-            tool_name, args = self.parse_action(action_str)
+            if not matched.action:
+                raise RuntimeError("Model not output <action>")
             
-            observation = self._run_tool(tool_name, args)
+            tool_name, args = parse_action(matched.action)
+            print(f"\n\n Action: {tool_name}({', '.join(args)})")
+            
+            # Only terminal-related tool need explicily request
+            should_continue = input(f"\n\nStill continue? (Y/N) ") if tool_name in required_permissions else "y"
+            if should_continue.lower() != 'y':
+                print("\n\n Operation cancelled")
+                return "Operation terminated"
+            
+            try:
+                observation = self._run_tool(tool_name, args)
+            except Exception as e:
+                observation = f"Tool errors: {str(e)}"
+            
+            print(f"\n\n🔍 Observation：{observation}")        
             obs_msg = f"<observation>{observation}</observation>"
             messages.append({"role": "user", "content": obs_msg})
             
@@ -73,21 +92,12 @@ class ReActAgent:
         return content
     
     
+    def _run_tool(self):
+        pass
+    
     def parse_action(self):
         pass
     
     def _parse_single_arg(self):
-        pass
-    
-    def _check_thought(self):
-        pass
-    
-    def _check_final(self):
-        pass
-    
-    def _check_action(self):
-        pass
-    
-    def _run_tool(self):
         pass
     
