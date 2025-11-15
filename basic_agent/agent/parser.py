@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import re
+import ast
 from typing import Optional, List, Tuple
 
 @dataclass
@@ -28,10 +29,50 @@ def match_react_output(content: str) -> MatchedStep:
     return MatchedStep(thought=thought, action=action, final_answer=final_answer)
 
 
-def parse_action(code_str: str) -> Tuple[str, List[str]]:
+
+"""
+    Parse usage:
     
-    pass
+    func_name, args = parse_action('write_to_file("foo,bar.txt", 123, [1, 2])')
+    # func_name = "write_to_file"
+    # args      = ["foo,bar.txt", 123, [1, 2]]
+    self.tools[func_name].handler(*args)
+"""
+
+def parse_action(code_str: str) -> Tuple[str, List[str]]:
+    match = re.match(r'(\w+)\((.*)\)', code_str, re.DOTALL)
+    if not match:
+        raise ValueError("Invalid function call syntax")
+    
+    func_name = match.group(1)
+    args_str = match.group(2).strip()
+    
+    args = []
+    current_arg = ""
+    in_string = False
+    string_char = None
+    i = 0
+    parent_depth = 0
+    
+    # TODO: Customized state machine
+    
 
 
 def _parse_single_arg(arg_str: str):
-    pass
+    arg_str = arg_str.strip()
+    
+    # If it is str symbol
+    if (arg_str.startswith('"') and arg_str.endswith('"')) or \
+       (arg_str.startswith("'") and arg_str.endswith("'")):
+           inner_str = arg_str[1:-1]
+           
+           inner_str = inner_str.replace('\\"', '"').replace("\\'", "'")
+           inner_str = inner_str.replace('\\n', '\n').replace('\\t', '\t')
+           inner_str = inner_str.replace('\\r', '\r').replace('\\\\', '\\')
+           return inner_str
+       
+    # Other type
+    try:
+        return ast.literal_eval(arg_str)
+    except (SyntaxError, ValueError):
+        return arg_str

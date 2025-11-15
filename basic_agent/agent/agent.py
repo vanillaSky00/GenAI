@@ -61,8 +61,8 @@ class ReActAgent:
     def get_tool_list(self):
         """Show the defined tools to the agent, with function signatures and docs."""
         tool_descriptions = []
-        tool_descriptions = []
-        for func in self.tools.values():
+        for tool in self.tools.values():
+            func = tool.handler
             name = func.__name__
             signature = str(inspect.signature(func))
             doc = inspect.getdoc(func)
