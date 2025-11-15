@@ -13,15 +13,15 @@ def match_react_output(content: str) -> MatchedStep:
     action = None
     final_answer = None
     
-    thought_match = re.search("", content, re.DOTALL)
+    thought_match = re.search(r"<thought>(.*?)</thought>", content, re.DOTALL)
     if thought_match:
         thought = thought_match.group(1).strip()
         
-    final_match = re.search("", content, re.DOTALL)
+    final_match = re.search(r"<final_answer>(.*?)</final_answer>", content, re.DOTALL)
     if final_match:
         final_answer = final_match.group(1).strip()
     
-    action_match = re.search("", content, re.DOTALL)
+    action_match = re.search(r"<action>(.*?)</action>", content, re.DOTALL)
     if action_match:
         action = action_match.group(1).strip()
     
