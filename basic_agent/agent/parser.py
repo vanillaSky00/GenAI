@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import re
-from typing import Optional
+from typing import Optional, List, Tuple
 
 @dataclass
 class MatchedStep:
@@ -28,9 +28,10 @@ def match_react_output(content: str) -> MatchedStep:
     return MatchedStep(thought=thought, action=action, final_answer=final_answer)
 
 
-def parse_action():
+def parse_action(code_str: str) -> Tuple[str, List[str]]:
+    
     pass
 
 
-def _parse_single_arg():
+def _parse_single_arg(arg_str: str):
     pass
