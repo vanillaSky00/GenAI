@@ -113,5 +113,5 @@ elif char == ')':
     paren_depth -= 1
 ```
 
-We are more likely use `Pushdown automaton (PDA)` with a simplified “stack”
+This is like `Pushdown automaton (PDA)` with a simplified “stack”
 (even though we only store an integer depth, not the full stack of symbols)

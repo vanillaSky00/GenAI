@@ -52,12 +52,41 @@ def parse_action(code_str: str) -> Tuple[str, List[str]]:
     in_string = False
     string_char = None
     i = 0
-    parent_depth = 0
+    paren_depth = 0
     
     # TODO: Customized state machine
-    
-    
+    while i < len(args_str):
+        char = args_str[i]
+        
+        if not in_string:  
+            if char in ["'",'"']:
+                in_string = True
+                string_char = char
+                current_arg += char
+            elif char == '(':
+                paren_depth += 1
+                current_arg += char
+            elif char == ')':
+                paren_depth -= 1
+                current_arg += char
+            elif char == ',' and paren_depth == 0:
+                args.append(_parse_single_arg(current_arg.strip()))
+                current_arg = ""
+            else:
+                current_arg += char
+        else:
+            current_arg += char
+            if char == string_char and (i == 0 or args_str[i-1] != '\\'):
+                in_string = False
+                string_char = None
+        
+        i+=1
 
+        # Add last arg
+        if current_arg.strip():
+            args.append(_parse_single_arg(current_arg.strip()))
+            
+    return func_name, args      
 
 def _parse_single_arg(arg_str: str):
     arg_str = arg_str.strip()
