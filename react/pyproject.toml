@@ -9,3 +9,6 @@ dependencies = [
     "openai>=2.8.0",
     "python-dotenv>=1.2.1",
 ]
+[project.scripts]
+react-agent = "react_agent.cli:main"
+
