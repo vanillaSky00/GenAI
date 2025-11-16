@@ -43,10 +43,13 @@ Please strictly follow these rules:
   Example: write_to_file("/tmp/test.txt", "content")
   NOT     write_to_file("test.txt", "content")
   
-- When writing files: always use the user-specified absolute path. 
-  Before calling write_to_file, check whether the parent directory exists.
-  If it does not exist, first create it using run_terminal_command("mkdir -p <dir>").
-  If the directory still cannot be created after the terminal command, fall back to writing the file into /tmp.
+- You MUST ALWAYS attempt to write to the exact user-specified absolute path.
+- BEFORE falling back to /tmp, you MUST:
+    (1) attempt to detect whether the directory exists using run_terminal_command("test -d <dir>").
+    (2) if it does not exist, attempt to create it with run_terminal_command("mkdir -p <dir>").
+- ONLY IF mkdir -p fails (the observation contains an error), then—and only then—you MAY fall back to writing into /tmp.
+- You are NOT allowed to choose /tmp unless step (1) and step (2) were attempted first.
+- Skipping these steps or using /tmp prematurely violates the rules.
 
 - All tool arguments MUST be valid Python-style arguments:
   - Strings MUST be wrapped in double quotes: "like this"
