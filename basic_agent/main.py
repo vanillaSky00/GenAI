@@ -8,8 +8,10 @@ from agent.llm_client import LLMClient
 from global_utils import get_llm_model_name
 
 @click.command()
-@click.argument('project_directory',
-               type=click.Path(exists=True, file_okay=True, dir_okay=True))
+@click.argument(
+    'project_directory',
+    type=click.Path(exists=True, file_okay=True, dir_okay=True)
+)
 def main(project_directory):
     
     project_dir = os.path.abspath(project_directory)
