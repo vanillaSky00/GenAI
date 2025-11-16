@@ -19,6 +19,7 @@ class ReActAgent:
         self.client = client
         self.project_directory = project_directory
     
+    
     def run(self, user_input: str):
         messages = [
             {"role": "system", "content": self.render_system_prompt(react_system_prompt_template)},
@@ -34,13 +35,17 @@ class ReActAgent:
                 print(f"\n\n💭 Thought: {matched.thought}")
                 
             if matched.final_answer:
+                utils.write_log(f"Final Answer: {matched.final_answer}")
                 return matched.final_answer
             
             if not matched.action:
+                utils.write_log("Model not output <action>")
                 raise RuntimeError("Model not output <action>")
             
             tool_name, args = parse_action(matched.action)
-            print(f"\n\n Action: {tool_name}({', '.join(args)})")
+            LOG_INFO = f"\n\n Action: {tool_name}({', '.join(args)})"
+            print("\n\n" + LOG_INFO)
+            utils.write_log(LOG_INFO)
             
             args = self._sanitize_action(tool_name, args)
             
@@ -53,9 +58,12 @@ class ReActAgent:
             try:
                 observation = self._run_tool(tool_name, args)
             except Exception as e:
-                observation = f"Tool errors: {str(e)}"
+                observation = f"[ERROR] {str(e)}"
             
-            print(f"\n\n🔍 Observation：{observation}")        
+            LOG_INFO = f"🔍 Observation：{observation}"
+            print("\n\n" + LOG_INFO) 
+            utils.write_log(LOG_INFO)
+                   
             obs_msg = f"<observation>{observation}</observation>"
             messages.append({"role": "user", "content": obs_msg})
             
