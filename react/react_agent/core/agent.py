@@ -42,6 +42,7 @@ class ReActAgent:
                 utils.write_log("Model not output <action>")
                 raise RuntimeError("Model not output <action>")
             
+            utils.write_log(f"Raw Model Reply: {content}")
             tool_name, args = parse_action(matched.action)
             LOG_INFO = f"\n\n Action: {tool_name}({', '.join(args)})"
             print("\n\n" + LOG_INFO)
@@ -95,7 +96,7 @@ class ReActAgent:
         )
     
     
-    def call_model(self, messages):
+    def call_model(self, messages) -> str:
         content = self.client.chat(messages)
         messages.append({"role": "assistant", "content": content})
         return content
