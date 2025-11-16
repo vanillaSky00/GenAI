@@ -1,7 +1,7 @@
 [project]
 name = "react-agent"
 version = "0.1.0"
-description =[project.scripts] "Add your description here"
+description = "A small ReAct-style agent demo"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -9,6 +9,17 @@ dependencies = [
     "openai>=2.8.0",
     "python-dotenv>=1.2.1",
 ]
+
 [project.scripts]
 react-agent = "react_agent.cli:main"
+
+# Configure setuptools for building
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Only include our package folder, ignore assets/
+[tool.setuptools.packages.find]
+include = ["react_agent*"]
+
 
