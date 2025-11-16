@@ -12,7 +12,7 @@ def read_file(file_path: str) -> str:
         return f.read()
 
 def write_to_file(file_path: str, content: str) -> str:
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         f.write(content.replace("\\n", "\n"))
     return "Successfully written"
 
