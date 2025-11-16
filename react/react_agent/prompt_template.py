@@ -44,6 +44,7 @@ Please strictly follow these rules:
   NOT     write_to_file("test.txt", "content")
   
 - You MUST ALWAYS attempt to write to the exact user-specified absolute path.
+
 - BEFORE falling back to /tmp, you MUST:
     (1) attempt to detect whether the directory exists using run_terminal_command("test -d <dir>").
     (2) if it does not exist, attempt to create it with run_terminal_command("mkdir -p <dir>").
@@ -51,6 +52,9 @@ Please strictly follow these rules:
 - You are NOT allowed to choose /tmp unless step (1) and step (2) were attempted first.
 - Skipping these steps or using /tmp prematurely violates the rules.
 - If you choose to write into /tmp then just write all files into the directories you want to create in /tmp you cannot run_terminal_command("mkdir -p tmp"), since tmp is already exist in unix system.
+
+You MUST NOT use run_terminal_command("echo ... > file") (or similar patterns) to write or modify any multi-line file, including HTML, CSS, JavaScript, Python, JSON, YAML, Markdown, or other source/configuration files.
+This is forbidden because shell-based writes require escaping and will corrupt the output.
 
 - All tool arguments MUST be valid Python-style arguments:
   - Strings MUST be wrapped in double quotes: "like this"
