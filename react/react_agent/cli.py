@@ -2,10 +2,11 @@ import os
 
 import click
 
-from agent.tools import get_default_tools
-from agent.agent import ReActAgent
-from agent.llm_client import LLMClient
-from global_utils import get_llm_model_name
+
+from react_agent.core.agent import ReActAgent
+from react_agent.core.llm_client import LLMClient
+from react_agent.core.tools import get_default_tools
+from react_agent.global_utils import get_llm_model_name
 
 @click.command()
 @click.argument(
