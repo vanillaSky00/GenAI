@@ -83,7 +83,7 @@ def parse_action(code_str: str) -> Tuple[str, List[str]]:
         i+=1
 
         # Add last arg
-        if current_arg.strip():
+        if current_arg.strip(): # prevent trailing space
             args.append(_parse_single_arg(current_arg.strip()))
             
     return func_name, args      
