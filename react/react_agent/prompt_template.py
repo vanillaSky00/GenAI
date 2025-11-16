@@ -36,14 +36,15 @@ Example 2:
 ⸻
 
 Please strictly follow these rules:
-
 - Every response must include exactly two tags: the first must be <thought>, and the second must be either <action> or <final_answer>.
 - After outputting an <action>, you must immediately stop generating and wait for a real <observation>. Never invent an <observation>.
 
 - File paths in tool parameters must be absolute paths (not filenames).
   Example: write_to_file("/tmp/test.txt", "content")
   NOT     write_to_file("test.txt", "content")
-  
+
+- If the absolute path does not exist, please use terminal to create
+
 - All tool arguments MUST be valid Python-style arguments:
   - Strings MUST be wrapped in double quotes: "like this"
   - Never output raw HTML or text outside of quotes.

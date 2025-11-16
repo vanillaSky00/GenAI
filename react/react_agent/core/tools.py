@@ -19,7 +19,7 @@ def write_to_file(file_path: str, content: str) -> str:
 def run_terminal_command(command):
     import subprocess
     run_result = subprocess.run(command, shell=True, capture_output=True, text=True)
-    return "Successfully executed" if run_result.returncode == 0 else run_result.stderr
+    return f"Successfully executed + {run_result}" if run_result.returncode == 0 else run_result.stderr
 
 def get_default_tools() -> Dict[str, Tool]:
     return {
