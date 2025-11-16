@@ -34,3 +34,84 @@ keeps ReActAgent focused on:
 - orchestrating messages
 - parsing tool calls
 - running tools
+
+
+
+## Parser
+
+Traditional way:
+regex and state machine
+```
+run("hello, world", (1, 2, 3), "line1\nline2", [1, (2, 3)])
+```
+
+we only want to parse like
+```
+"hello, world"
+(1, 2, 3)
+"line1\nline2"
+[1, (2, 3)]
+```
+
+### 🚀 How a finite state machine solve?
+1 Tracks whether we are in a quoted string. <br>
+2 Tracks whether we are in nested parenthesis. <br>
+3 Only treats a `,` a real argument seperator if:
+
+  - not inside quoted string, **and**
+  - `paren_depth = 0`
+
+| Variable      | Purpose                                         |
+| ------------- | ----------------------------------------------- |
+| `args`        | Final parsed argument list                      |
+| `current_arg` | The argument being built as characters are read |
+| `in_string`   | True if inside `"..."` or `'...'`               |
+| `string_char` | Which quote started the string (`"` or `'`)     |
+| `i`           | Character index                                 |
+| `paren_depth` | Count of nested parentheses                     |
+
+
+### Analsis of parsing rules
+```python
+if char == string_char and (i == 0 or args_str[i-1] != '\\'):
+```
+
+#### 🧪 Case 1: A normal string
+```
+"hello world"
+            ^
+```
+
+#### 🧪 Case 2: Contain escaped char
+```
+"hello \"world\""
+        ^
+```
+This `"` is escaped by `\` before it, so it should NOT end the string.
+
+#### 🧩 Python would access [-1]
+```
+if i == 0:
+    treat quote normally (not escaped)
+```
+
+`i == 0` is just for safty because we must make the flag `in_String = True` first, which requires at lease one char and `i` would then goes to 1. After finding another end, we just check which type `'` or `"` and is not escaped. But at then, `i` would always greater than 1.
+
+#### 🧩 Parsing insight
+A DFA cannot recognize languages like
+
+$\{a^nb^n \ |\  n ≥ 0\}$
+
+because it has no memory
+but our parser
+```py
+paren_depth = 0
+
+if char == '(':
+    paren_depth += 1
+elif char == ')':
+    paren_depth -= 1
+```
+
+We are more likely use `Pushdown automaton (PDA)` with a simplified “stack”
+(even though we only store an integer depth, not the full stack of symbols)

@@ -61,7 +61,7 @@ def parse_action(code_str: str) -> Tuple[str, List[str]]:
 def _parse_single_arg(arg_str: str):
     arg_str = arg_str.strip()
     
-    # If it is str symbol
+    # If arg is str symbol
     if (arg_str.startswith('"') and arg_str.endswith('"')) or \
        (arg_str.startswith("'") and arg_str.endswith("'")):
            inner_str = arg_str[1:-1]
