@@ -19,7 +19,7 @@ This loop enables the model to interact with the outside world instead of only g
 <br>
 
 <p align="center">
-  <img src="./assets/ReAct_workflow.svg" width="650">
+  <img src="./assets/svg/ReAct_workflow.svg" width="650">
 </p>
 
 ## What is Plan-And-Execute
