@@ -8,8 +8,8 @@ from .tools import Tool
 from .llm_client import LLMClient
 from .policy import required_permissions
 from .parser import match_react_output, parse_action
-from basic_agent.prompt_template import react_system_prompt_template
-import basic_agent.utils as utils  
+from ..prompt_template import react_system_prompt_template
+from ..global_utils import utils  
 
 
 class ReActAgent:
