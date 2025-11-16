@@ -93,6 +93,7 @@ class ReActAgent:
             operating_system=utils.get_operating_system_name(),
             tool_list=tool_list,
             file_list=file_list,
+            project_directory=self.project_directory
         )
     
     

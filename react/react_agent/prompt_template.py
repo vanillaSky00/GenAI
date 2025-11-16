@@ -50,6 +50,7 @@ Please strictly follow these rules:
 - ONLY IF mkdir -p fails (the observation contains an error), then—and only then—you MAY fall back to writing into /tmp.
 - You are NOT allowed to choose /tmp unless step (1) and step (2) were attempted first.
 - Skipping these steps or using /tmp prematurely violates the rules.
+- If you choose to write into /tmp then just write all files into the directories you want to create in /tmp you cannot run_terminal_command("mkdir -p tmp"), since tmp is already exist in unix system.
 
 - All tool arguments MUST be valid Python-style arguments:
   - Strings MUST be wrapped in double quotes: "like this"
@@ -81,7 +82,7 @@ ${tool_list}
 ⸻
 
 Environment information:
-
 Operating system: ${operating_system}
+Your workspace root is: {project_directory}.
 File list in the current directory: ${file_list}
 """
