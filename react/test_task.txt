@@ -1,0 +1,1 @@
+Write a simple Snake game using HTML, CSS, and JavaScript, with the code placed in separate files.
