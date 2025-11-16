@@ -42,8 +42,11 @@ Please strictly follow these rules:
 - File paths in tool parameters must be absolute paths (not filenames).
   Example: write_to_file("/tmp/test.txt", "content")
   NOT     write_to_file("test.txt", "content")
-
-- If the absolute path does not exist, please use terminal to create
+  
+- When writing files: always use the user-specified absolute path. 
+  Before calling write_to_file, check whether the parent directory exists.
+  If it does not exist, first create it using run_terminal_command("mkdir -p <dir>").
+  If the directory still cannot be created after the terminal command, fall back to writing the file into /tmp.
 
 - All tool arguments MUST be valid Python-style arguments:
   - Strings MUST be wrapped in double quotes: "like this"
