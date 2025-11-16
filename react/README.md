@@ -149,3 +149,22 @@ We should do both <br>
 - Code = firewall: validate, repair, or reject bad actions.
 
 We tell the model the rules in the system prompt also assume it will sometimes break them anyway, and add checks / fixes in code.
+
+#### use echo and the string cannot be parsed
+```
+[22:48:48] Raw Model Reply: <thought>The CSS file has been successfully created in the `/tmp/snake_game` directory. Now, I need to create the JavaScript file to implement the functionality of the Snake game.</thought><action>run_terminal_command("echo 'const canvas = document.getElementById(\"gameCanvas\");\\nconst ctx = canvas.getContext(\"2d\");\\n\\nlet snake = [\\n    { x: 10, y: 10 }\\n];\\nlet direction = { x: 0, y: 0 };\\n\\nfunction gameLoop() {\\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\\n    ctx.fillStyle = \"lime\";\\n    snake.forEach(part => {\\n        ctx.fillRect(part.x, part.y, 10, 10);\\n    });\\n    // Move Snake Logic Here\\n    requestAnimationFrame(gameLoop);\\n}\\n\\ndocument.addEventListener(\"keydown\", event => {\\n    if (event.key === \"ArrowUp\") direction = { x: 0, y: -10 };\\n    if (event.key === \"ArrowDown\") direction = { x: 0, y: 10 };\\n    if (event.key === \"ArrowLeft\") direction = { x: -10, y: 0 };\\n    if (event.key === \"ArrowRight\") direction = { x: 10, y: 0 };\\n});\\n\\ngameLoop();' > /tmp/snake_game/snake.js")</action>
+```
+after parsed:
+```
+body {\
+    display: flex;\
+    justify-content: center;\
+    align-items: center;\
+    height: 100vh;\
+    background-color: #000;\
+}\
+\
+canvas {\
+    border: 1px solid #fff;\
+}
+```
