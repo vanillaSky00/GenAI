@@ -36,14 +36,35 @@ Example 2:
 ⸻
 
 Please strictly follow these rules:
-- Every response must include exactly two tags: the first must be <thought>, and the second must be either <action> or <final_answer>
-- After outputting an <action>, you must immediately stop generating and wait for a real <observation>. Making up an <observation> yourself will cause an error.
-- If any tool parameter inside <action> spans multiple lines, represent line breaks using \n, for example:
-  <action>write_to_file("/tmp/test.txt", "a\nb\nc")</action>
-- File paths in tool parameters must be absolute paths, not just filenames. For example, you must write
-  write_to_file("/tmp/test.txt", "content")
-  instead of
-  write_to_file("test.txt", "content")
+
+- Every response must include exactly two tags: the first must be <thought>, and the second must be either <action> or <final_answer>.
+- After outputting an <action>, you must immediately stop generating and wait for a real <observation>. Never invent an <observation>.
+
+- File paths in tool parameters must be absolute paths (not filenames).
+  Example: write_to_file("/tmp/test.txt", "content")
+  NOT     write_to_file("test.txt", "content")
+  
+- All tool arguments MUST be valid Python-style arguments:
+  - Strings MUST be wrapped in double quotes: "like this"
+  - Never output raw HTML or text outside of quotes.
+
+- If any tool parameter spans multiple lines, encode newlines using \n.
+  Example: <action>write_to_file("/tmp/test.txt", "a\nb\nc")</action>
+
+- For write_to_file(path, content):
+  - You MUST provide exactly 2 arguments: the path and ONE single string containing the entire file content.
+  - Do NOT split content into multiple arguments.
+  - Do NOT output HTML or text without wrapping it in a single double-quoted string.
+
+Correct example:
+<action>write_to_file("/tmp/snake.html", "<html>...</html>")</action>
+
+Incorrect (will cause tool errors):
+<action>write_to_file("/tmp/snake.html", "<html>", "<body>", "...")</action>
+
+Incorrect (will cause tool errors):
+<action>write_to_file("/tmp/snake.html", <html><head>...</head></html>)</action>
+
 
 ⸻
 

@@ -2,7 +2,7 @@
 import inspect
 import os
 from string import Template
-from typing import Dict
+from typing import Dict, List
 
 from .tools import Tool
 from .llm_client import LLMClient
@@ -41,6 +41,8 @@ class ReActAgent:
             
             tool_name, args = parse_action(matched.action)
             print(f"\n\n Action: {tool_name}({', '.join(args)})")
+            
+            args = self._sanitize_action(tool_name, args)
             
             # Only terminal-related tool need explicily request
             should_continue = input(f"\n\nStill continue? (Y/N) ") if tool_name in required_permissions else "y"
@@ -91,8 +93,15 @@ class ReActAgent:
         return content
     
     
-    def _run_tool(self, tool_name: str, args: tuple):
+    def _run_tool(self, tool_name: str, args: List[str]):
         return self.tools[tool_name].handler(*args)
     
-
     
+    def _sanitize_action(self, tool_name: str, args: List[str]):
+        if tool_name == "write_to_file":
+            if len(args) >= 2:
+                file_path = args[0]
+                content = "".join(args[1:])
+                return [file_path, content]
+    
+        return args

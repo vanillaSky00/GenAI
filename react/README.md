@@ -115,3 +115,37 @@ elif char == ')':
 
 This is like `Pushdown automaton (PDA)` with a simplified “stack”
 (even though we only store an integer depth, not the full stack of symbols)
+
+#### Common bug
+```
+TypeError: write_to_file() takes 2 positional arguments but 97 were given
+```
+
+Because we encounter edge cases like:
+
+```
+write_to_file("tests/snake.html", <html><head><title>Snake Game</title>...</html>)
+```
+or
+```
+write_to_file("tests/snake.html",
+"<html><head>...</head>",
+"<body>...</body>",
+"..."
+)
+```
+
+However, the parser is for: \(It is important to know how you analyze LLM output\)
+
+```
+write_to_file("tests/snake.html", "<html><head>...</head><body>...</body></html>")
+```
+We can resort to other approaches, but in this parser case we can have two system design: <br>
+
+**Should we revise system prompt or parser code?**
+
+We should do both <br>
+- System prompt = contract for the model. 
+- Code = firewall: validate, repair, or reject bad actions.
+
+We tell the model the rules in the system prompt also assume it will sometimes break them anyway, and add checks / fixes in code.

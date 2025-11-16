@@ -12,10 +12,10 @@ def get_operating_system_name() -> str:
 
 def get_api_key() -> str:
     load_dotenv()    
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("OPENROUTER_API_KEY")
     
     if not api_key:
-        raise ValueError("Cannot find OPENAI_API_KEY, please make sure .env is correctly configured")
+        raise ValueError("Cannot find OPENROUTER_API_KEY, please make sure .env is correctly configured")
     
     return api_key
 
