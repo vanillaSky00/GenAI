@@ -1,5 +1,5 @@
 from openai import OpenAI
-from ..global_utils import utils
+from react_agent import global_utils as utils
 
 class LLMClient:
     def __init__(self, model):
