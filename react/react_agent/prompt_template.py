@@ -87,6 +87,6 @@ ${tool_list}
 
 Environment information:
 Operating system: ${operating_system}
-Your workspace root is: {project_directory}.
+Your workspace root is: ${project_directory}.
 File list in the current directory: ${file_list}
 """
