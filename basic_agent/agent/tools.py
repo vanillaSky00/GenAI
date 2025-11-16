@@ -39,3 +39,6 @@ def get_default_tools() -> Dict[str, Tool]:
             handler=run_terminal_command,
         ),
     }
+    
+    
+# TODO: memory_search(), memory_write(), db schema

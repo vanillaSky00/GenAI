@@ -3,7 +3,7 @@ import os
 from agent.tools import get_default_tools
 from agent.agent import ReActAgent
 from agent.llm_client import LLMClient
-from utils import get_llm_model_name
+from global_utils import get_llm_model_name
 
 def main(project_directory):
     
