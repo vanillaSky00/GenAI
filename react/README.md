@@ -57,9 +57,19 @@ Reference: https://langchain-ai.github.io/langgraph/tutorials/plan-and-execute/p
 
 
 
-## 
+## Overal structure
+Just like any other agent:
+```
+env = Environment()
+tools = Tools(env)
+system_prompt = "Goals, constraints, and how to act"
 
-keeps ReActAgent focused on:
+while True:
+    action = llm.run(system_prompt + env.state)
+    env.state = tools.run(action)
+```
+
+We keep ReActAgent focused on:
 - rendering the system prompt
 - orchestrating messages
 - parsing tool calls
