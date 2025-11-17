@@ -3,6 +3,12 @@
 This project is a simple demo showing how an AI agent can reason and interact with external tools.
 It follows the ReAct (Reasoning + Acting) workflow and combines it with the Plan-and-Execute pattern to build an extendable agent framework.
 
+## Setup
+create `.env` with the same layer of `README.md` and place OPENROUTER_API_KEY, feel free to overwrite `/react_agent/core/llm_client.py` to get customized llm API.
+```
+OPENROUTER_API_KEY=
+LLM_MODEL=
+```
 
 ## What is ReAct
 Paper: https://arxiv.org/abs/2210.03629
