@@ -27,7 +27,8 @@ pip install uv
 ```
 uv sync
 ```
-4. Run the agent from the project root (top-level directory), passing the folder you want the agent to work inside:
+### 4. Run the agent 
+In the project root (top-level directory), passing the folder you want the agent to work inside:
 ```
 uv run react-agent ./tests 
 ```
