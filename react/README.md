@@ -74,8 +74,6 @@ We keep ReActAgent focused on:
 - parsing tool calls
 - running tools
 
-
-
 ## Parser
 
 Traditional way:
