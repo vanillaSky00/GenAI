@@ -56,7 +56,6 @@ This loop enables the model to interact with the outside world instead of only g
 Reference: https://langchain-ai.github.io/langgraph/tutorials/plan-and-execute/plan-and-execute/
 
 
-
 ## Overal structure
 Just like any other agent:
 ```
