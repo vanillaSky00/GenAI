@@ -3,12 +3,26 @@
 This project is a simple demo showing how an AI agent can reason and interact with external tools.
 It follows the ReAct (Reasoning + Acting) workflow and combines it with the Plan-and-Execute pattern to build an extendable agent framework.
 
-## Setup
-create `.env` with the same layer of `README.md` and place OPENROUTER_API_KEY, feel free to overwrite `/react_agent/core/llm_client.py` to get customized llm API.
+## Quick Start
+### 1. Create a .env file in the same folder as README.md and add your API key:
 ```
 OPENROUTER_API_KEY=
 LLM_MODEL=
 ```
+You can also modify `react_agent/core/llm_client.py` if you want to use a different LLM provider.
+### 2. Install uv (Python package manager):
+```
+pip install uv
+```
+### 3. Install dependencies:
+```
+uv sync
+```
+4. Run the agent from the project root (top-level directory), passing the folder you want the agent to work inside:
+```
+uv run react-agent ./tests 
+```
+You can replace `./tests` with any directory you want the agent to operate in.
 
 ## What is ReAct
 Paper: https://arxiv.org/abs/2210.03629
