@@ -5,7 +5,7 @@ It implements the **ReAct (Reasoning + Acting)** pattern and integrates a **Plan
 
 [![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)]()
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)]()
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg)]()
 [![ReAct Workflow](https://img.shields.io/badge/Agent-ReAct-orange.svg)]()
 [![Plan & Execute](https://img.shields.io/badge/Pattern-Plan--and--Execute-yellow.svg)]()
 [![LLM Powered](https://img.shields.io/badge/LLM-OpenRouter-purple)]()
