@@ -2,7 +2,7 @@
 
 This project is a minimal demonstration of how an AI agent can reason and interact with external tools.
 It implements the **ReAct (Reasoning + Acting)** pattern and integrates a **Plan-and-Execute** workflow to build a clear, extensible agent framework.
-
+ 
 [![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)]()
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg)]()
