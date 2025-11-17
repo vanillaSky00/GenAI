@@ -1,7 +1,16 @@
 ## ReAct + Plan-and-Execute — Minimal AI Agent Demo
 
-This project is a simple demo showing how an AI agent can reason and interact with external tools.
-It follows the ReAct (Reasoning + Acting) workflow and combines it with the Plan-and-Execute pattern to build an extendable agent framework.
+This project is a minimal demonstration of how an AI agent can reason and interact with external tools.
+It implements the **ReAct (Reasoning + Acting)** pattern and integrates a **Plan-and-Execute** workflow to build a clear, extensible agent framework.
+
+[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)]()
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)]()
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)]()
+[![ReAct Workflow](https://img.shields.io/badge/Agent-ReAct-orange.svg)]()
+[![Plan & Execute](https://img.shields.io/badge/Pattern-Plan--and--Execute-yellow.svg)]()
+[![LLM Powered](https://img.shields.io/badge/LLM-OpenRouter-purple)]()
+[![uv Package Manager](https://img.shields.io/badge/Powered%20by-uv-black)]()
+[![OpenAI Compatible](https://img.shields.io/badge/LLM_Adapter-OpenAI%20API-blueviolet)]()
 
 ## Quick Start
 ### 1. Create a .env file in the same folder as README.md and add your API key:
